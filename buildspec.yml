@@ -17,7 +17,7 @@ phases:
       - echo "Start building Client.py"
       - pylint client/client.py
       - COMMIT_SHA=$(git rev-parse HEAD)
-      - DOCKER_TAG="${COMMIT_SHA:0:7}"
+      - DOCKER_TAG=$(echo $COMMIT_SHA | cut -c1-7)
       - docker build -t $FRONTEND_IMAGE -t $FRONTEND_IMAGE:$DOCKER_TAG client/.
       - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - docker push $FRONTEND_IMAGE
