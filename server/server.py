@@ -6,7 +6,7 @@ import grpc
 import communication_pb2
 import communication_pb2_grpc
 
-class CommunicationServicer(communication_pb2_grpc.CommunicationServicer):
+class CommunicationServicer(communication_pb2_grpc.CommunicationServicer): # pylint: disable=too-few-public-methods
     """"This is the CommunicationServicer class used by the grcp module."""
     def SendMessage(self, request, context):
         """This function ACKNOWLED the request from the client app"""
