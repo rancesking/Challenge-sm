@@ -18,14 +18,13 @@ phases:
       - pylint client/client.py
       - COMMIT_SHA=$(git rev-parse HEAD)
       - DOCKER_TAG=$(echo $COMMIT_SHA | cut -c1-7)
-      - docker build -t $FRONTEND_IMAGE -t $FRONTEND_IMAGE:$DOCKER_TAG -f client/Dockerfile.client client/.
       - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - docker build -t $FRONTEND_IMAGE -t $FRONTEND_IMAGE:$DOCKER_TAG -f client/Dockerfile.client client/.
       - docker push $FRONTEND_IMAGE
       - docker push $FRONTEND_IMAGE:$DOCKER_TAG
       - echo "Start building Server.py"
       - pylint server/server.py
       - docker build -t $BACKEND_IMAGE -t $BACKEND_IMAGE:$DOCKER_TAG -f server/Dockerfile.server server/.
-      - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - docker push $BACKEND_IMAGE
       - docker push $BACKEND_IMAGE:$DOCKER_TAG
 
