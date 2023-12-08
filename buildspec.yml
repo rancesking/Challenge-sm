@@ -6,11 +6,16 @@ env:
     DOCKERHUB_PASSWORD: "/project/simetrik/dockerhub-password"
     FRONTEND_IMAGE: "/project/simetrik/frontend-image"
     BACKEND_IMAGE:  "/project/simetrik/backend-image"
+    CLUSTER_NAME:  "/project/simetrik/cluster-name"
 
 phases:
   pre_build:
     commands:
       - pip install -r requirements.txt
+      - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+      - chmod +x get_helm.sh
+      - ./get_helm.sh
+      - helm version
 
   build:
     commands:
@@ -27,7 +32,12 @@ phases:
       - docker build -t $BACKEND_IMAGE -t $BACKEND_IMAGE:$DOCKER_TAG -f server/Dockerfile.server server/.
       - docker push $BACKEND_IMAGE
       - docker push $BACKEND_IMAGE:$DOCKER_TAG
+      - aws eks --region us-east-1 update-kubeconfig --name $CLUSTER_NAME
 
   post_build:
     commands:
       - echo "Build completed on $(date)"
+      - echo "Start deployment"
+      - helm upgrade --install python-app -f helm/values.yaml --set frontend.image=$FRONTEND_IMAGE:$DOCKER_TAG --set backend.image=$BACKEND_IMAGE:$DOCKER_TAG helm/.
+      - echo "Deployment completed on $(date)"
+
