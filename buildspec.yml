@@ -37,7 +37,5 @@ phases:
   post_build:
     commands:
       - echo "Build completed on $(date)"
-      - echo "Start deployment"
-      - helm upgrade --install python-app -f helm/values.yaml --set frontend.image=$FRONTEND_IMAGE:$DOCKER_TAG --set backend.image=$BACKEND_IMAGE:$DOCKER_TAG helm/.
-      - echo "Deployment completed on $(date)"
+
 
