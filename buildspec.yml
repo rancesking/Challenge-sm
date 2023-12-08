@@ -12,8 +12,9 @@ phases:
     commands:
       - pip install -r requirements.txt
 
-  build_client:
+  build:
     commands:
+      - echo "Start building Client.py"
       - pylint client/client.py
       - COMMIT_SHA=$(git rev-parse HEAD)
       - DOCKER_TAG="${COMMIT_SHA:0:7}
@@ -21,9 +22,7 @@ phases:
       - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - docker push $FRONTEND_IMAGE
       - docker push $FRONTEND_IMAGE:$DOCKER_TAG
-
-  build_server:
-    commands:
+      - echo "Start building Server.py"
       - pylint server/server.py
       - COMMIT_SHA=$(git rev-parse HEAD)
       - DOCKER_TAG="${COMMIT_SHA:0:7}"
