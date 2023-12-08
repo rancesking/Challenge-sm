@@ -1,0 +1,26 @@
+# Dockerfile.client
+
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy requirements txt file
+COPY requirements.txt .
+
+# Install requirements
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the client files into the container
+COPY client.py .
+COPY communication.proto .
+COPY templates templates
+COPY static static
+
+# Initializate the grcp module
+RUN python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. communication.proto
+
+# Expose the Flask port
+EXPOSE 5000
+
+CMD ["python", "client.py"]

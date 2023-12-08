@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gRPC Web Client</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Welcome to gRPC Web Client</h1>
+    <button onclick="sendMessage()">Send Message</button> 
+    <button onclick="clearLogs()">Clear Logs</button>
+    <div id="output-block"></div>
+    <div class="copyright">
+        &copy; 2023 Rances Acosta. All rights reserved.
+    </div>
+    <script>
+        function sendMessage() {
+            // Use JavaScript Fetch API to make an AJAX request to your Flask server
+            fetch('/send_message')
+                .then(response => response.text())
+                .then(data => {
+                    // Update the content of the output block
+                    document.getElementById('output-block').innerText = data;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        function clearLogs() {
+            // Code to clear the logs in the div
+            document.getElementById('output-block').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
