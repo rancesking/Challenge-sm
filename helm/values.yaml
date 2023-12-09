@@ -1,8 +1,8 @@
 frontend:
   image:
     repo: xkingrd/simetrik-frontend
-    tag: hello
+    tag: willy
 backend:
   image:
     repo: xkingrd/simetrik-backend
-    tag: 3e07ddf
+    tag: willy
