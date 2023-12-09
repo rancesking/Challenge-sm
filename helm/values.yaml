@@ -1,1 +1,8 @@
-@@
+frontend:
+  image:
+    repo: xkingrd/simetrik-frontend
+    tag: hello
+backend:
+  image:
+    repo: xkingrd/simetrik-backend
+    tag: hello
