@@ -1,0 +1,8 @@
+frontend:
+  image:
+    repo: xkingrd/simetrik-frontend
+    tag: arm2
+backend:
+  image:
+    repo: xkingrd/simetrik-backend
+    tag: arm2
