@@ -5,4 +5,4 @@ frontend:
 backend:
   image:
     repo: xkingrd/simetrik-backend
-    tag: 1253aa1
+    tag: eb8cd36
