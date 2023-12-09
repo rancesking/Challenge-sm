@@ -53,3 +53,18 @@ resource "kubernetes_service_account" "service-account" {
   }
   depends_on = [module.eks_worker_nodes]
 }
+
+resource "helm_release" "argocd" {
+  name = "argocd"
+
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
+  create_namespace = true
+  version          = "3.35.4"
+  depends_on = [
+    kubernetes_service_account.service-account
+  ]
+
+  values = [file("values/argocd.yaml")]
+}
