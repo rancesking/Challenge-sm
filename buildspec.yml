@@ -42,8 +42,8 @@ phases:
       - git config --global user.email "codebuild@example.com"
       - git config --global user.name "CodeBuild"
       - git add helm/values.yaml
-      - git commit -m "Update image tag to $IMAGE_TAG"
-      - git tag -a $IMAGE_TAG -m "Release $IMAGE_TAG"
+      - git commit -m "Update image tag to $DOCKER_TAG"
+      - git tag -a $DOCKER_TAG -m "Release $DOCKER_TAG"
       - git remote set-url origin https://$GITHUB_TOKEN@github.com/rancesking/Challenge-sm.git
       - git push origin main
       - echo "CD completed on $(date)"
