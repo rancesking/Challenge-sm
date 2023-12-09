@@ -7,11 +7,15 @@ env:
     FRONTEND_IMAGE: "/project/simetrik/frontend-image"
     BACKEND_IMAGE:  "/project/simetrik/backend-image"
     CLUSTER_NAME:  "/project/simetrik/cluster-name"
+    GITHUB_TOKEN: "/project/simetrik/github-token"
 
 phases:
   pre_build:
     commands:
       - pip install -r requirements.txt
+      - wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+      - chmod +x /usr/bin/yq
+      - chmod +x update_image_tag.sh
 
   build:
     commands:
@@ -32,5 +36,16 @@ phases:
   post_build:
     commands:
       - echo "Build completed on $(date)"
+      - echo "Updating the image tag"
+      - bash update_image_tag.sh $DOCKER_TAG
+      - echo "Updating the repo"
+      - git config --global user.email "codebuild@example.com"
+      - git config --global user.name "CodeBuild"
+      - git add helm/values.yml
+      - git commit -m "Update image tag to $IMAGE_TAG"
+      - git tag -a $IMAGE_TAG -m "Release $IMAGE_TAG"
+      - git remote set-url origin https://$GITHUB_TOKEN@github.com/rancesking/Challenge-sm.git
+      - git push origin main
+      - echo "CD completed on $(date)"
 
 

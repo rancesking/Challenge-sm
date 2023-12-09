@@ -1,7 +1,8 @@
 frontend:
-  image: xkingrd/simetrik-frontend:latest
-  volumePath: /path/to/frontend
-
+  image:
+    repo: xkingrd/simetrik-frontend
+    tag: hello
 backend:
-  image: xkingrd/simetrik-backend:latest
-  volumePath: /path/to/backend
+  image:
+    repo: xkingrd/simetrik-backend
+    tag: hello
