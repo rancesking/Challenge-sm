@@ -1,8 +1,0 @@
-frontend:
-  image:
-    repo: xkingrd/simetrik-frontend
-    tag: 379cbe8
-backend:
-  image:
-    repo: xkingrd/simetrik-backend
-    tag: 379cbe8
