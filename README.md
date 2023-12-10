@@ -9,11 +9,14 @@ Esta es mi implementación de la aplicación demo para la prueba de DevOps.
 Diseñé la infraestructura en AWS utilizando las mejores prácticas de despliegue de aplicaciones web en la nube de AWS (Well-Architected Framework), empleando el uso de varias zonas de disponibilidad para obtener alta disponibilidad en nuestras cargas de trabajo. Dentro de los servicios utilizados están:
 
 - EKS para el manejo de nuestro clúster de Kubernetes.
+- VPC para el manejo de la red que intercomunica los servicios
 - EC2 para los nodos workers de nuestro clúster de Kubernetes.
 - Elastic Load Balancer para asignar un punto de entrada para nuestro Ingress.
 - NAT Gateway para el acceso a Internet de nuestros nodos workers para descargar las imágenes de Docker desde DockerHub.
 - CloudWatch para monitorear el consumo de los recursos.
 - SNS para enviar notificaciones para alertar a los administradores de la infraestructura.
+- S3 para almacenar el remote state de terraform.
+- Dynamo DB para almacenar el lock del terraform state.
 
 
 ## Tecnologías Utilizadas
@@ -43,7 +46,7 @@ Diseñé el pipeline en AWS CodeBuild, el CI donde se prueba el codigo y se crea
 
 ## Uso
 
-1) Clonar el repositorio, exportar las variables de las credenciales de la cuenta de AWS e inizializar el despligue de la infraestructura.
+1) Clonar el repositorio, exportar las variables de las credenciales de la cuenta de AWS e inicializar el despliegue de la infraestructura.
 
 ```js
 git clone https://github.com/rancesking/Challenge-sm.git
@@ -54,7 +57,7 @@ terraform init
 terraform apply
 ```
 
-2) Actualizar las credenciales de acceso al cluster de kubernetes y desplegar la applicacion usando helm.
+2) Actualizar las credenciales de acceso al cluster de kubernetes y desplegar la aplicación usando helm.
 
 ```js
 aws eks update-kubeconfig --region us-east-1 --name dev-cluster-xxxxxx
