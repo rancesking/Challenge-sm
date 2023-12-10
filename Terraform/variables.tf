@@ -11,7 +11,7 @@ variable "env" {
 
 variable "cli_user" {
   description = "The CLI user owner of the resource created."
-  default     = "racosta"
+  default     = "simetrik"
 }
 
 variable "instance_type" {

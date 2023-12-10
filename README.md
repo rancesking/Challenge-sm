@@ -1,6 +1,6 @@
 # DevOps Test
 
-Esta es mi implementación de la aplicación demo para la prueba de DevOps!!!.
+Esta es mi implementación de la aplicación demo para la prueba de DevOps.
 
 ## Diseño de infraestructura en AWS
 
@@ -11,7 +11,7 @@ Diseñé la infraestructura en AWS utilizando las mejores prácticas de desplieg
 - EKS para el manejo de nuestro clúster de Kubernetes.
 - EC2 para los nodos workers de nuestro clúster de Kubernetes.
 - Elastic Load Balancer para asignar un punto de entrada para nuestro Ingress.
-- NAT Gateway para el acceso a Internet de nuestros nodos workers para descargar las imágenes de Docker desde Docker Hub.
+- NAT Gateway para el acceso a Internet de nuestros nodos workers para descargar las imágenes de Docker desde DockerHub.
 - CloudWatch para monitorear el consumo de los recursos.
 - SNS para enviar notificaciones para alertar a los administradores de la infraestructura.
 
@@ -30,7 +30,7 @@ Para la ejecución de este proyecto utilicé:
 - ALB Ingress Controller
 - ArgoCD
 
-Diseñé 1 pipeline en AWS CodeBuild, el CI donde se prueba el codigo y se crea la imagen de docker luego es subida al repositorio en docker hub luego se corre el script que actualiza el tag de la imagenes des los servicios. El CD es manejado por ArgoCD que se mantiene monitoreando el folder helm donde estan los manifiestos de kubernetes para aplicarlos al momento de reproducirse un cambio.
+Diseñé el pipeline en AWS CodeBuild, el CI donde se prueba el codigo y se crea la imagen de docker luego es subida al repositorio en docker hub luego se corre el script que actualiza el tag de la imagenes des los servicios. El CD es manejado por ArgoCD que se mantiene monitoreando el folder helm donde estan los manifiestos de kubernetes para aplicarlos al momento de reproducirse un cambio.
 
 ## Repositorios y Documentos
 
@@ -43,7 +43,32 @@ Diseñé 1 pipeline en AWS CodeBuild, el CI donde se prueba el codigo y se crea 
 
 ## Uso
 
-WIP
+1) Clonar el repositorio, exportar las variables de las credenciales de la cuenta de AWS e inizializar el despligue de la infraestructura.
+
+```js
+git clone https://github.com/rancesking/Challenge-sm.git
+cd Challenge-sm/Terraform
+export AWS_ACCESS_KEY_ID=AKIASEXAMPLEKEY
+export AWS_SECRET_ACCESS_KEY=JBXWX6uh3EXAMPLESECRETKEY
+terraform init
+terraform apply
+```
+
+2) Actualizar las credenciales de acceso al cluster de kubernetes y desplegar la applicacion usando helm.
+
+```js
+aws eks update-kubeconfig --region us-east-1 --name dev-cluster-xxxxxx
+cd Challenge-sm/helm
+helm install python-app .
+```
+
+3) Verificar el funcionamiento de la app
+
+```js
+kubectl get pods
+kubectl get ingress
+Consultar usando el explorador: http://python-grcp-ingress-594997929.us-east-1.elb.amazonaws.com/
+```
 
 ## Licencia
 
