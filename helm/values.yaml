@@ -1,8 +1,8 @@
 frontend:
   image:
     repo: xkingrd/simetrik-frontend
-    tag: arm1
+    tag: a81f595
 backend:
   image:
     repo: xkingrd/simetrik-backend
-    tag: arm1
+    tag: a81f595
