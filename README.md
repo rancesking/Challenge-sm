@@ -30,15 +30,15 @@ Para la ejecución de este proyecto utilicé:
 - ALB Ingress Controller
 - ArgoCD
 
-Diseñé 1 pipeline en AWS CodeBuild, el CI donde se prueba el codigo y se crea la imagen de docker luego es subida al repositorio en docker hub. Otro para el CD donde se modifican los datos en el manifiesto helm para ser escaneado por argo para hacer el CD.
+Diseñé 1 pipeline en AWS CodeBuild, el CI donde se prueba el codigo y se crea la imagen de docker luego es subida al repositorio en docker hub luego se corre el script que actualiza el tag de la imagenes des los servicios. El CD es manejado por ArgoCD que se mantiene monitoreando el folder helm donde estan los manifiestos de kubernetes para aplicarlos al momento de reproducirse un cambio.
 
 ## Repositorios y Documentos
 
 - [Frontend Docker Image](https://hub.docker.com/r/xkingrd/simetrik-frontend)
 - [Backend Docker Image](https://hub.docker.com/r/xkingrd/simetrik-backend)
-- [Terraform IAC Repo](https://github.com/rancesking/Challenge-sm/tree/main/Terraform)
-- [Manifiestos helm de K8s](https://github.com/rancesking/Challenge-sm/tree/main/helm)
-- [CI/CD Codedbuild yml](https://github.com/rancesking/Challenge-sm/blob/main/buildspec.yml)
+- [Terraform IAC Files](https://github.com/rancesking/Challenge-sm/tree/main/Terraform)
+- [Helm Files K8s](https://github.com/rancesking/Challenge-sm/tree/main/helm)
+- [CI/CD Codedbuild Spec's](https://github.com/rancesking/Challenge-sm/blob/main/buildspec.yml)
 
 
 ## Uso
