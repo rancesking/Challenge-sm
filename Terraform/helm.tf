@@ -63,7 +63,7 @@ resource "helm_release" "argocd" {
   create_namespace = true
   version          = "3.35.4"
   depends_on = [
-    kubernetes_service_account.service-account
+    helm_release.lb
   ]
 
   values = [file("values/argocd.yaml")]
