@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Terraform module for creating AWS EKS Clusters. This eks cluster have the ALB ingress Controller deployed.
+This is a Terraform module for creating AWS EKS Clusters. This eks cluster have the ALB ingress Controller and ArgoCD deployed.
 
 ## Usage
 
